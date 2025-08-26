@@ -1,5 +1,3 @@
-executor: "KubernetesExecutor"
-
 # Images
 images:
   airflow:
@@ -8,6 +6,8 @@ images:
     # Specifying digest takes precedence over tag.
     digest: ~
     pullPolicy: IfNotPresent
+
+
 dags:
   gitSync:
     enabled: true
@@ -25,5 +25,5 @@ dags:
     maxFailures: 0
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "dags"
+    subPath: "geo-dags"
     credentialsSecret: git-credentials

@@ -17,7 +17,7 @@ docker build --pull --tag $IMAGE_NAME:$IMAGE_TAG -f Dockerfile .
 kind load docker-image $IMAGE_NAME:$IMAGE_TAG
 
 kubectl create namespace $NAMESPACE
-
+kubectl apply -f k8s/secrets/git-secrets.yaml
 
 helm install $RELEASE_NAME apache-airflow/airflow \
     --namespace $NAMESPACE -f helm-chart/helm-values-airflow3.yaml \
