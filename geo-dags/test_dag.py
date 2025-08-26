@@ -14,8 +14,8 @@ with DAG(
         print("Hello world, from Airflow!")
     
     @task
-    def goodbye_world():
+    def modify_dag():
         time.sleep(5)
-        print("Goodbye world, from Airflow!")
+        print("Modified DAG for test Git Sync")
     
-    hello_world() >> goodbye_world()
+    hello_world() >> modify_dag()
