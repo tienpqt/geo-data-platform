@@ -6,6 +6,8 @@ import requests, zipfile, io
 import os
 import json
 
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+
 DATA_DIR = "/tmp/data"
 SHAPEFILE_URL = "https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_20m.zip"
 
@@ -39,6 +41,16 @@ def convert_to_geoparquet():
         json.dump(metadata, f, indent=2)
     with open(os.path.join("metadata.json"), "w") as f:
         json.dump(metadata, f, indent=2)
+    
+       
+    # Load the file to S3
+    s3_hook = S3Hook(aws_conn_id="aws_conn")
+    s3_hook.load_file(
+        filename=output_path,
+        key="geoparquet/us_state.parquet",
+        bucket_name="geospatial-data-platform",
+        replace=True
+    )
 
 with DAG(
     dag_id="shapefile_to_geoparquet",
