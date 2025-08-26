@@ -3,7 +3,7 @@ import datetime
 from airflow.sdk import DAG, task
 
 with DAG(
-    dag_id="test_dag",
+    dag_id="test_dag2",
     start_date=datetime.datetime(2021, 1, 1),
     schedule="@daily"
 ):
@@ -14,8 +14,8 @@ with DAG(
         print("Hello world, from Airflow!")
     
     @task
-    def modify_dag2():
+    def modify_dag():
         time.sleep(5)
-        print("Modified DAG for test Git Sync")
+        print("Add new dags for testing Git Sync")
     
-    hello_world() >> modify_dag2()
+    hello_world() >> modify_dag()
