@@ -1,0 +1,3 @@
+# Geospatial libraries
+py7zr==1.0.0
+geopandas
